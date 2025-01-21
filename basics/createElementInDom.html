@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>How to create a new element</title>
+</head>
+<body style = "background-color: blueviolet; color: red;">
+    
+</body>
+<script>
+    const creating = document.createElement('h1');
+    // console.log(creating);
+    creating.className = "newClass"; //also note it's 'creating.className' not 'creating.class', you can also use setAttribute() method for creating new class and id or title
+    // creating.setAttribute("id", "anotherId");
+    // creating.id = "newId";
+    // creating.id = Math.round(Math.random() * 10 + 1);  //using math.random() and math.round() method for  generating random numbers
+    creating.setAttribute("title", "NEW TITLE");
+    creating.style.backgroundColor = "orange";
+    creating.style.padding = "10px";
+    // creating.innerText = "Learning New Stuff";
+    const addingText = document.createTextNode("Learning new stuff");
+    creating.appendChild(addingText);
+    
+    document.body.appendChild(creating);    
+</script>
+</html>
