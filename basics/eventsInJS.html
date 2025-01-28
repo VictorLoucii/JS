@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>htnml Events </title>
+</head>
+<body style="background-color: #414141; color: aliceblue;">
+    <h2>Amazing image</h2>
+    <div >
+        <ul id="images">
+            <li><img width="200px" id="photoshop" src="https://images.pexels.com/photos/3561339/pexels-photo-3561339.jpeg?auto=compress&cs=tinysrgb&w=1600&lazy=load" alt="photoshop"></li>
+            <li><img width="200px" id="japan" src="https://images.pexels.com/photos/3532553/pexels-photo-3532553.jpeg?auto=compress&cs=tinysrgb&w=1600&lazy=load" alt=""></li>
+            <li><img width="200px" id="river" src="https://images.pexels.com/photos/3532551/pexels-photo-3532551.jpeg?auto=compress&cs=tinysrgb&w=1600&lazy=load" alt=""></li>
+            <li><img width="200px" id="owl" src="https://images.pexels.com/photos/3532552/pexels-photo-3532552.jpeg?auto=compress&cs=tinysrgb&w=1600&lazy=load" alt="" ></li>
+            <li><img width="200px" id="prayer" src="https://images.pexels.com/photos/2522671/pexels-photo-2522671.jpeg?auto=compress&cs=tinysrgb&w=1600&lazy=load" alt=""></li>
+            <li><a style="color: aliceblue;" href="https://google.com" id="google">Google</a></li>
+        </ul>
+   </div>
+</body>
+<script>
+    // document.getElementById('owl').onclick = function(){
+    //     alert('owl clicked');
+    // }  //don't use .onclick method() as it has less features
+
+    //better approach: use event listener() method:
+    document.getElementById('owl').addEventListener('click',function(e){
+        console.log(e);
+        alert('owl clicked again!');
+    },false) //here 'false' is the third parameter of 'addEventListener' method by default, meaning you don't have to write it if you want, check notes below
+
+    //better approach: use attachEvent() method:
+    //better approach: jQuery - on
+
+    //properties of event object:
+    // type, timestamp, defaultPrevented
+    // target, toElement, srcElement, currentTarget,
+    // clientX, clientY, screenX, screenY
+    // altkey, ctrlkey, shiftkey, keyCode
+
+    //event propagation:
+    //you can also use 'document.getElementById() method' for the following statements
+    document.querySelector('#images').addEventListener('click', function(e){  
+        console.log("clicked inside the ul"); //check notes below
+    },false)
+
+        document.querySelector('#owl').addEventListener('click',function(e){
+        console.log("clicked on owl");  //check notes below
+    },false)
+
+    //using stop propagation:
+    //     document.querySelector('#owl').addEventListener('click',function(e){
+    //     console.log("clicked on owl");
+    //     e.stopPropagation(); //this will stop displaying the 'ul' id
+    // },false)
+
+    //suppose i want to stop visiting the website link on click it:
+    document.getElementById("google").addEventListener('click',function(e){
+        console.log("clicked on google");
+        e.preventDefault();
+        e.stopPropagation();
+    },false)
+
+    //suppose i want images to disappear if i mouse click on it:
+    document.getElementById('images').addEventListener('click', function(e){
+        console.log(e.target.parentNode);  //check notes below
+        console.log(e.target.tagName);
+        if(e.target.tagName === 'IMG'){
+            console.log(e.target.id);
+            let removeIt = e.target.parentNode;  
+            removeIt.remove(); 
+        }
+        
+    },false)
+
+</script>
+</html>
