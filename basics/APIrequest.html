@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>API REQUEST </title>
+</head>
+<body style="background-color: #4c5d7c;color: #8d0e0e;">
+</body>
+<script>
+  const requestURL = 'https://api.github.com/users/VictorLoucii';  //storing the api link in a variable
+  // making an object using 'new' keyword on 'XMLHttpRequest()'method:
+  const newSfuff = new XMLHttpRequest();
+  // console.log(newSfuff.readyState) //output: 0, before the open()
+  newSfuff.open('get',requestURL);  //The request is initialized but not yet sent.
+  newSfuff.send(); //This starts the process of sending the request to the server
+  // console.log(newSfuff.readyState)  //output: 1 , check notes below
+  //using a function to continously track the readState values:
+  // newSfuff.onreadystatechange = function(){
+  //   console.log(newSfuff.readyState);
+  // }
+  // output of console.log(newSfuff.readyState); :
+  // 2
+  // 3
+  // 4
+  // using The onreadystatechange event handler (which gives you the current state of the readyState of the XMLHttpRequest) , if-else condition and 'this' on the above function:
+  newSfuff.onreadystatechange = function(){
+    // if(newSfuff.readyState === 4){
+    //   console.log(this.responseText); //note that 'this' is used for current context, also the output will be the API details (response text) in the console of the web page if the readyState is 4
+    // }
+
+    //storing this.response (api details) in a variable:
+    // const info = this.responseText; //atm here 'info' is a string
+    // console.log(info.login);  //output undefined, because we haven't JSON.parse() 'info' here
+
+    const data = JSON.parse(this.responseText) ; //JSON.parse() converts the JSON string retrieved from the response text to objects
+    console.log(data.login); //since now info has been converted to an object, we can access it's attribute 'login'
+    console.log(data.url);
+  }
+</script>
+</html>
